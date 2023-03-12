@@ -84,8 +84,6 @@ struct Home: View {
           ForEach(Array(0..<data.count), id: \.self) { i in
             GeometryReader { geo in
                 CardView(data: $data[i], hero: $hero)
-                .padding(.horizontal, data[i].expand ? 0 : 15)
-              
               // going to move view up how its down from top.
                 .offset(y: data[i].expand ? -geo.frame(in: .global).minY : 0)
               
@@ -93,8 +91,11 @@ struct Home: View {
                 .opacity(hero ? (data[i].expand ? 1 : 0) : 1)
                 .onTapGesture {
                   withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0)) {
-                    self.hero.toggle()
-                    data[i].expand.toggle()
+                    if !data[i].expand {
+                      // open only one time then close button will work.
+                      self.hero.toggle()
+                      data[i].expand.toggle()
+                    }
                   }
                 }
             }
@@ -116,14 +117,124 @@ struct CardView: View {
   @Binding var hero: Bool
   
   var body: some View {
-    VStack {
-      Image(data.image)
-        .resizable()
-        .frame(height: data.expand ? 350 : 250)
-        .cornerRadius(data.expand ? 0 : 25)
+    ScrollView {
+      ZStack(alignment: .topTrailing ) {
+        VStack {
+          Image(data.image)
+            .resizable()
+            .frame(height: data.expand ? 350 : 250)
+            .cornerRadius(data.expand ? 0 : 25)
+          
+          if data.expand {
+            HStack {
+              Text(data.title)
+                .font(.title)
+                .fontWeight(.bold)
+              
+              Spacer()
+            }
+            .padding()
+            
+            Text(data.details)
+              .padding(.horizontal)
+            
+            HStack {
+              Text("Details")
+                .font(.title)
+                .fontWeight(.bold)
+              
+              Spacer()
+            }
+            .padding()
+            
+            HStack(spacing: 0) {
+              Button {
+                
+              } label: {
+                Image(systemName: "sun.max.fill")
+                  .foregroundColor(Color.white)
+                  .padding()
+                  .background(Color.cyan)
+                  .cornerRadius(8)
+              }
+              
+              Spacer(minLength: 0)
+              
+              Button {
+                
+              } label: {
+                Image(systemName: "location.fill")
+                  .foregroundColor(Color.white)
+                  .padding()
+                  .background(Color.cyan)
+                  .cornerRadius(8)
+              }
+              
+              Spacer(minLength: 0)
+              
+              Button {
+                
+              } label: {
+                Image(systemName: "dollarsign.circle.fill")
+                  .foregroundColor(Color.white)
+                  .padding()
+                  .background(Color.cyan)
+                  .cornerRadius(8)
+              }
+              
+              Spacer(minLength: 0)
+              
+              Button {
+                
+              } label: {
+                Image(systemName: "figure.walk.circle.fill")
+                  .foregroundColor(Color.white)
+                  .padding()
+                  .background(Color.cyan)
+                  .cornerRadius(8)
+              }
+            }
+            .padding(.horizontal, 25)
+            
+            Spacer()
+            
+            Button {
+              
+            } label: {
+              Text("Let's Go")
+                .foregroundColor(Color.white)
+                .padding(.vertical)
+                .frame(width: UIScreen.main.bounds.width / 2)
+                .background(LinearGradient(gradient: .init(colors: [Color.red, Color.yellow]), startPoint: .leading, endPoint: .trailing))
+                .clipShape(Capsule())
+            }
+            .padding(.bottom, 20)
+          }
+        }
+        .padding(.horizontal, data.expand ? 0 : 20)
+        // to ignore spacer scroll
+        .contentShape(Rectangle())
+        
+        // showing only when its expanded.
+        if data.expand {
+          Button {
+            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.5, blendDuration: 0)) {
+              data.expand.toggle()
+              hero.toggle()
+            }
+          } label: {
+            Image(systemName: "xmark")
+              .foregroundColor(Color.white)
+              .padding()
+              .background(Color.black.opacity(0.8))
+              .clipShape(Circle())
+          }
+          .padding(.top, 60)
+          .padding(.trailing, 10)
+        }
+      }
+      .background(Color.white)
     }
-    // to ignore spacer scroll
-    .contentShape(Rectangle() )
   }
 }
 
