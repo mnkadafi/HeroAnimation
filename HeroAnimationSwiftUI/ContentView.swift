@@ -22,14 +22,14 @@ struct ContentView_Previews: PreviewProvider {
 struct Home: View {
   @State var data: [CardModel] = [
     CardModel(id: 1,
-              image: "Kelimutu",
-              title: "TN Kelimutu",
-              details: "Taman Nasional Kelimutu terletak di Flores, Indonesia. Taman nasional ini terdiri dari bukit-bukit dan gunung-gunung dengan Gunung Kelibara (1.731 m) sebagai puncak tertinggi. Gunung Kelimutu, terdapat danau Danau tiga warna yang juga merupakan tempat dari Taman Nasional Kelimutu.\n\nDi dalam Taman Nasional Kelimutu, terdapat arboretum, hutan kecil seluas 4,5 hektare yang mewakili koleksi keanekaragaman flora di daerah tersebut. Di sana terdapat 78 jenis pohon yang dikelompokkan ke dalam 36 suku. Beberapa koleksi flora yang merupakan endemik Kelimutu adalah uta onga (Begonia kelimutuensis), turuwara (Rhododendron renschianum), dan arngoni (Vaccinium varingiaefolium).",
-              expand: false),
-    CardModel(id: 2,
               image: "LakeToba",
               title: "Danau Toba",
               details: "Danau Toba adalah lokasi letusan gunung berapi super masif berkekuatan VEI 8 sekitar 69.000 sampai 77.000 tahun yang lalu yang memicu perubahan iklim global. Metode penanggalan terkini menetapkan bahwa 74.000 tahun yang lalu lebih akurat. Letusan ini merupakan letusan eksplosif terbesar di Bumi dalam kurun 25 juta tahun terakhir. Menurut teori bencana Toba, letusan ini berdampak besar bagi populasi manusia di seluruh dunia; dampak letusan menewaskan sebagian besar manusia yang hidup waktu itu dan diyakini menyebabkan penyusutan populasi di Afrika timur tengah dan India sehingga memengaruhi genetika populasi manusia di seluruh dunia sampai sekarang.",
+              expand: false),
+    CardModel(id: 2,
+              image: "GunungBromo",
+              title: "Gunung Bromo",
+              details: "Gunung Bromo (dari bahasa Sanskerta: Brahma, salah seorang Dewa Utama dalam agama Hindu) atau dalam bahasa Tengger dieja \"Brama\", adalah sebuah gunung berapi aktif di Jawa Timur, Indonesia. Gunung ini memiliki ketinggian 2.329 meter di atas permukaan laut dan berada dalam empat wilayah kabupaten, yakni Kabupaten Probolinggo, Kabupaten Pasuruan, Kabupaten Lumajang, dan Kabupaten Malang. Gunung Bromo terkenal sebagai objek wisata utama di Jawa Timur. Sebagai sebuah objek wisata, Bromo menjadi menarik karena statusnya sebagai gunung berapi yang masih aktif. Gunung Bromo termasuk dalam kawasan Taman Nasional Bromo Tengger Semeru.\n\nBentuk tubuh Gunung Bromo bertautan antara lembah dan ngarai dengan kaldera atau lautan pasir seluas sekitar 10 kilometer persegi. Ia mempunyai sebuah kawah dengan garis tengah ± 800 meter (utara-selatan) dan ± 600 meter (timur-barat). Sedangkan daerah bahayanya berupa lingkaran dengan jari-jari 4 km dari pusat kawah Bromo.",
               expand: false),
     CardModel(id: 3,
               image: "Bunaken",
@@ -47,19 +47,20 @@ struct Home: View {
               details: "Kepulauan Raja Ampat merupakan rangkaian empat gugusan pulau yang berdekatan dan berlokasi di barat bagian Kepala Burung (Vogelkoop) Pulau Papua. Secara administrasi, gugusan ini berada di bawah Kabupaten Raja Ampat, Provinsi Papua Barat. Kepulauan ini sekarang menjadi tujuan para penyelam yang tertarik akan keindahan pemandangan bawah lautnya. Empat gugusan pulau yang menjadi anggotanya dinamakan menurut empat pulau terbesarnya, yaitu Pulau Waigeo, Pulau Misool, Pulau Salawati, dan Pulau Batanta.",
               expand: false),
     CardModel(id: 6,
-              image: "GunungBromo",
-              title: "Gunung Bromo",
-              details: "Gunung Bromo (dari bahasa Sanskerta: Brahma, salah seorang Dewa Utama dalam agama Hindu) atau dalam bahasa Tengger dieja \"Brama\", adalah sebuah gunung berapi aktif di Jawa Timur, Indonesia. Gunung ini memiliki ketinggian 2.329 meter di atas permukaan laut dan berada dalam empat wilayah kabupaten, yakni Kabupaten Probolinggo, Kabupaten Pasuruan, Kabupaten Lumajang, dan Kabupaten Malang. Gunung Bromo terkenal sebagai objek wisata utama di Jawa Timur. Sebagai sebuah objek wisata, Bromo menjadi menarik karena statusnya sebagai gunung berapi yang masih aktif. Gunung Bromo termasuk dalam kawasan Taman Nasional Bromo Tengger Semeru.\n\nBentuk tubuh Gunung Bromo bertautan antara lembah dan ngarai dengan kaldera atau lautan pasir seluas sekitar 10 kilometer persegi. Ia mempunyai sebuah kawah dengan garis tengah ± 800 meter (utara-selatan) dan ± 600 meter (timur-barat). Sedangkan daerah bahayanya berupa lingkaran dengan jari-jari 4 km dari pusat kawah Bromo.",
+              image: "Kelimutu",
+              title: "TN Kelimutu",
+              details: "Taman Nasional Kelimutu terletak di Flores, Indonesia. Taman nasional ini terdiri dari bukit-bukit dan gunung-gunung dengan Gunung Kelibara (1.731 m) sebagai puncak tertinggi. Gunung Kelimutu, terdapat danau Danau tiga warna yang juga merupakan tempat dari Taman Nasional Kelimutu.\n\nDi dalam Taman Nasional Kelimutu, terdapat arboretum, hutan kecil seluas 4,5 hektare yang mewakili koleksi keanekaragaman flora di daerah tersebut. Di sana terdapat 78 jenis pohon yang dikelompokkan ke dalam 36 suku. Beberapa koleksi flora yang merupakan endemik Kelimutu adalah uta onga (Begonia kelimutuensis), turuwara (Rhododendron renschianum), dan arngoni (Vaccinium varingiaefolium).",
               expand: false)
   ]
+  @State var hero: Bool = false
   
   var body: some View {
     VStack {
-      ScrollView {
+      ScrollView(showsIndicators: hero ? false : true) {
         VStack {
           HStack {
             VStack(alignment: .leading, spacing: 12) {
-              Text("Friday, May 2023")
+              Text("Sunday, March 2023")
               
               Text("Today")
                 .font(.title)
@@ -77,16 +78,52 @@ struct Home: View {
         }
         
         VStack(spacing: 15) {
-          ForEach(self.data) { i in
-            Image(i.image)
-              .resizable()
-              .frame(height: 250)
-              .cornerRadius(25)
-              .padding(.horizontal)
+          // going to implement hero animation
+          // using geometry reader to get the position of the card
+          
+          ForEach(Array(0..<data.count), id: \.self) { i in
+            GeometryReader { geo in
+                CardView(data: $data[i], hero: $hero)
+                .padding(.horizontal, data[i].expand ? 0 : 15)
+              
+              // going to move view up how its down from top.
+                .offset(y: data[i].expand ? -geo.frame(in: .global).minY : 0)
+              
+              // going to hide all other views when a view is expanded.
+                .opacity(hero ? (data[i].expand ? 1 : 0) : 1)
+                .onTapGesture {
+                  withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0)) {
+                    self.hero.toggle()
+                    data[i].expand.toggle()
+                  }
+                }
+            }
+            .frame(height: data[i].expand ? UIScreen.main.bounds.height : 250)
+            // going to disable scrollview when view is expanded.
+            // and 500 is for disabling the drag for scrollview
+            .simultaneousGesture(DragGesture(minimumDistance: data[i].expand ? 0 : 500).onChanged({ (_) in
+              print("dragging")
+            }))
           }
         }
       }
     }
+  }
+}
+
+struct CardView: View {
+  @Binding var data: CardModel
+  @Binding var hero: Bool
+  
+  var body: some View {
+    VStack {
+      Image(data.image)
+        .resizable()
+        .frame(height: data.expand ? 350 : 250)
+        .cornerRadius(data.expand ? 0 : 25)
+    }
+    // to ignore spacer scroll
+    .contentShape(Rectangle() )
   }
 }
 
